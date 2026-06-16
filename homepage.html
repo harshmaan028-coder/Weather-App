@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="src/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
+    <style>
+      html{
+        scroll-behavior: smooth;
+      }
+      
+        body {
+            visibility: hidden;
+        }
+        .loading{
+            visibility: visible;
+        }
+      
+          #map {
+            height: 300px;
+            width: 100%;
+          }
+    </style>
+</head>
+
+<body class="relative ">
+    <div class="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-yellow-100/40 blur-3xl"></div>
+
+    <div class="loading" style="position: fixed; top: 0; left: 0; z-index: 21;
+    font-size: 72px; width: 100vw; height: 100vh;
+    display: flex; justify-content: center; align-items: center; background-color: #e2e8f0;">
+        ...
+    </div>
+
+    <div class="all min-h-screen grid grid-cols-[1fr_2fr] bg-linear-to-br from-slate-200 via-blue-100 to-sky-300">
+         
+        <section class="left-portion bg-white/50 backdrop-blur-xl p-6 shadow-xl 
+        border border-white/60 flex flex-col 
+        gap-6">
+
+        <div class="w-full max-w-xl">
+        <div
+        class="group flex items-center gap-3 px-5 h-14 bg-white border border-slate-200 rounded-full shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md focus-within:border-sky-500 focus-within:ring-4 focus-within:ring-sky-500/10">
+
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 text-slate-400 group-focus-within:text-sky-500 transition-colors"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+        </svg>
+
+        <input
+            type="text"
+            placeholder="Search for a city..."
+            spellcheck="false"
+            class="input-box2 flex-1 bg-transparent outline-none text-slate-700 placeholder:text-slate-400 text-base font-medium" />
+        </div>
+        </div>
+
+        <div class="weather-icon flex justify-center">
+        <img src="src/Image/half-moon.png" alt="" class="today-weather-image max-w-75">
+        </div>
+
+        <div class="flex flex-col gap-1 ">
+        <p id="city_name" class="text-sm uppercase tracking-[0.2em] text-slate-400">
+            NEW DELHI
+        </p>
+
+        <h1 class="text-8xl font-light tracking-tight">
+        <span id="temperature">24</span><span class="temperatureC text-5xl align-top">°C</span>
+        </h1>
+
+        <div class="mt-6 text-slate-500">
+        Feels like <span id="feels_like" class="font-medium text-slate-700">27° ✨</span>
+        </div>
+
+        <p class="text-slate-500 text-lg mt-1">
+        <span class="current-day-name">Monday</span> • <span id="time">4:00 PM</span>
+        </p>
+
+        </div>
+
+        <div class=" flex gap-4 mb-2">
+            <div class="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/40
+                        backdrop-blur-xl
+                        border border-white/30
+                        shadow-lg
+                        bg-white/40 backdrop-blur-md">
+                <span id="sky-icon">⛅</span>
+                <span id="sky-status">Mostly Cloudy</span>
+            </div>
+        
+            <div class="inline-flex items-center px-4 py-3 rounded-2xl bg-white/40
+                        backdrop-blur-xl
+                        border border-white/30
+                        shadow-lg
+                        bg-white/40 backdrop-blur-md">
+                <span>☔ Rain Chance</span>
+                <span id="rain_percent" class="ml-2 font-semibold">30%</span>
+            </div>
+        </div>
+
+<div class="sun-card sunrise shadow-xl" id="sunrise">
+  <div class="sun-card-content">
+    <div class="sun-card-icon">☀️</div>
+
+    <div class="sun-card-info">
+      <h3>Sunrise</h3>
+
+      <div class="sun-time">
+        <span class="sunrise-time">05:42</span> <span class="sun-time-span">AM</span>
+      </div>
+
+      <div class="sun-meta">
+         Starts in <span class="sunrise-lefttime">1h 23m</span>
+      </div>
+    </div>
+
+    <div class="sun-scene">
+      <div class="sun"></div>
+      <div class="mountains"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sun-card sunset shadow-xl" id="sunset">
+  <div class="sun-card-content">
+    <div class="sun-card-icon">🌇</div>
+
+    <div class="sun-card-info">
+      <h3>Sunset</h3>
+
+      <div class="sun-time">
+        <span class="sunset-time">06:57</span>  <span class="sun-time-span">PM</span>
+      </div>
+
+      <div class="sun-meta">
+        Daylight: <span id="daylight">13h 15m</span>
+      </div>
+    </div>
+
+    <div class="sun-scene">
+      <div class="sun"></div>
+      <div class="mountains"></div>
+    </div>
+  </div>
+</div>
+
+        <div class="w-full">
+            <img src="src/Image/vector-banner-on-themes-trip-260nw-336649379.jpg" 
+            alt=""
+            class="rounded-3xl border border-white shadow-xl"
+            id="continent-image">
+        </div>
+
+        </section>
+        
+        <section class="right-portion py-8 px-6">
+
+            <section class="toggle-bar flex justify-between items-center">
+
+                <div class="flex gap-6">
+                
+                    <button
+                        class="today active">
+                
+                        Today
+                
+                        <span
+                            class="today-line blue-line">
+                        </span>
+                
+                    </button>
+                
+                    <button
+                        class="week non-active">
+
+                        Week
+
+                        <span
+                            class="week-line ">
+                        </span>
+
+                    </button>
+                
+                </div>
+
+                <div class="flex gap-6">
+                <!-- Right Controls -->
+                <div class="flex items-center gap-4">
+            
+                    <!-- C / F Toggle -->
+                    <div
+                        class="flex items-center p-1">
+            
+                        <button
+                            class="celsius active2">
+                            °C
+                        </button>
+            
+                        <button
+                            class="fahrenheit non-active2">
+                            °F
+                        </button>
+                    </div>
+                        <button class="sidebar-icon flex flex-col gap-1.5">
+                            <span class="w-5 h-[2px] bg-slate-700 rounded-full"></span>
+                            <span class="w-5 h-[2px] bg-slate-700 rounded-full"></span>
+                            <span class="w-5 h-[2px] bg-slate-700 rounded-full"></span>
+                        </button>
+                </div>
+            </section>
+            <div class="day-periods">
+            
+            <div class="period-card morning">
+              <div class="top-7">
+                <div class="icon-7">☀️</div>
+                <span>MORNING</span>
+              </div>
+            
+            <div class="imgvala">
+                <div class="left">
+            
+                <div class="time-7">8:00 AM</div>
+            
+                <div class="temp-7">34°</div>
+            
+                <div class="condition-7">Hot & Sunny</div>
+            
+                </div>
+            
+                <div class="right">
+            <img src="src/Image/sun (1).png" alt="" class="card-img">
+                </div>
+            </div>
+                <div class="divider"></div>
+            
+                <div class="stats-7">
+                  <div class="stat-7">
+                    <span>Feels Like</span>
+                    <strong class="card-feels">26°</strong>
+                  </div>
+            
+                  <div class="stat-7">
+                    <span>Humidity</span>
+                    <strong class="card-humidity">62%</strong>
+                  </div>
+            
+                  <div class="stat-7">
+                    <span>Wind</span>
+                    <strong class="card-wind">12 km/h</strong>
+                  </div>
+                </div>
+              </div>
+            
+            
+            
+              <div class="period-card evening"> 
+                <div class="top-7">
+                  <div class="icon-7">🌇</div>
+                  <span>EVENING</span>
+                </div>
+            
+            <div class="imgvala">
+                <div class="left">
+            
+                <div class="time-7">4:00 PM</div>
+            
+                <div class="temp-7">34°</div>
+            
+                <div class="condition-7">Hot & Sunny</div>
+            
+                </div>
+            
+                <div class="right">
+            <img src="src/Image/weather.png" alt="" class="card-img">
+                </div>
+            </div>
+            
+                <div class="divider"></div>
+            
+                <div class="stats-7">
+                  <div class="stat-7">
+                    <span>Feels Like</span>
+                    <strong class="card-feels">30°</strong>
+                  </div>
+            
+                  <div class="stat-7">
+                    <span>Humidity</span>
+                    <strong class="card-humidity">50%</strong>
+                  </div>
+            
+                  <div class="stat-7">
+                    <span>Wind</span>
+                    <strong class="card-wind">10 km/h</strong>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="period-card night">
+                <div class="top-7">
+                  <div class="icon-7">🌙</div>
+                  <span>NIGHT</span>
+                </div>
+            
+            <div class="imgvala">
+                <div class="left">
+            
+                <div class="time-7">10:00 PM</div>
+            
+                <div class="temp-7">34°</div>
+            
+                <div class="condition-7">Hot & Sunny</div>
+            
+                </div>
+            
+                <div class="right">
+            <img src="src/Image/half-moon.png" alt="" class="card-img">
+                </div>
+            </div>
+            
+                <div class="divider"></div>
+            
+                <div class="stats-7">
+                  <div class="stat-7">
+                    <span>Feels Like</span>
+                    <strong class="card-feels">38°</strong>
+                  </div>
+            
+                  <div class="stat-7">
+                    <span >Humidity</span>
+                    <strong class="card-humidity">40%</strong>
+                  </div>
+            
+                  <div class="stat-7">
+                    <span>Wind</span>
+                    <strong class="card-wind">8 km/h</strong>
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+            <section class="days-7 py-8 flex justify-between gap-3 hidden">
+
+                <div class="forecast-card1 bg-gray-100 rounded-3xl p-2 flex flex-col  items-center gap-2 flex-1 bg-white/40 backdrop-blur-lg border border-white/50 shadow-lg flex flex-col items-center py-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 class="weekDays text-base font-semibold text-slate-600">
+                        Sunday
+                    </h2>
+                    <img src="src/Image/cloudy.png" alt="" class="past-day-image w-[80%]">
+                    <div class="flex items-center gap-2">
+                    <span class="high1 text-[26px] font-normal text-slate-800">15°</span>
+                    <span class="low1 text-base text-slate-500">8°</span>
+                    </div>
+                </div>
+                <div class="rounded-3xl p-2 flex flex-col gap-2 items-center flex-1 bg-white/80 backdrop-blur-lg border border-white/50 shadow-lg flex flex-col items-center py-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 class="weekDays text-base font-semibold text-slate-600">
+                        Monday</h2>
+                    <img src="src/Image/cloudy (1).png" alt="" class="today-weather-image w-[80%]">
+                    <div class="flex items-center gap-2">
+                    <span class="high2 text-[26px] font-normal text-slate-800">20°</span>
+                    <span class="low2 text-base text-slate-500">8°</span>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-3xl p-2 flex flex-col gap-2 items-center flex-1 bg-white/40 backdrop-blur-lg border border-white/50 shadow-lg flex flex-col items-center py-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 class="weekDays text-base font-semibold text-slate-600">
+                        Tuesday</h2>
+                    <img src="src/Image/cloudy (2).png" alt="" class="next-day-image-1 w-[80%]">
+                    <div class="flex items-center gap-2">
+                    <span class="high3 text-[26px] font-normal text-slate-800">16°</span>
+                    <span class="low3 text-base text-slate-500">8°</span>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-3xl p-2 flex flex-col gap-2 items-center flex-1 bg-white/40 backdrop-blur-lg border border-white/50 shadow-lg flex flex-col items-center py-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 class="weekDays text-base font-semibold text-slate-600">
+                        Wednesday</h2>
+                    <img src="src/Image/rainy-day.png" alt="" class="next-day-image-2 w-[80%]">
+                    <div class="flex items-center gap-2">
+                    <span class="high4 text-[26px] font-normal text-slate-800">12°</span>
+                    <span class="low4 text-base text-slate-500">6°</span>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-3xl p-2 flex flex-col gap-2 items-center flex-1 bg-white/40 backdrop-blur-lg border border-white/50 shadow-lg flex flex-col items-center py-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 class="weekDays text-base font-semibold text-slate-600">
+                        Thursday</h2>
+                    <img src="src/Image/rain.png" alt="" class="next-day-image-3 w-[80%]">
+                    <div class="flex items-center gap-2">
+                    <span class="high5 text-[26px] font-normal text-slate-800">30°</span>
+                    <span class="low5 text-base text-slate-500">8°</span>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-3xl p-2 flex flex-col gap-2 items-center flex-1 bg-white/40 backdrop-blur-lg border border-white/50 shadow-lg flex flex-col items-center py-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 class="weekDays text-base font-semibold text-slate-600">
+                        Friday</h2>
+                    <img src="src/Image/rainbow (1).png" alt="" class="next-day-image-4 w-[80%]">
+                    <div class="flex items-center gap-2">
+                    <span class="high6 text-[26px] font-normal text-slate-800">11°</span>
+                    <span class="low6 text-base text-slate-500">8°</span>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-3xl p-2 flex flex-col gap-2 items-center flex-1 bg-white/40 backdrop-blur-lg border border-white/50 shadow-lg flex flex-col items-center py-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 class="weekDays text-base font-semibold text-slate-600">
+                        Saturday</h2>
+                    <img src="src/Image/snow.png" alt="" class="next-day-image-5 w-[80%]">
+                    <div class="flex items-center gap-2">
+                    <span class="high7 text-[26px] font-normal text-slate-800">24°</span>
+                    <span class="low7 text-base text-slate-500">8°</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+
+                <div class="flex items-center gap-3 py-8">
+
+                    <div class="w-1 h-6 bg-blue-500 rounded-full"></div>
+                    <h2 class="text-xl font-semibold text-slate-800">
+                        Today's Highlights
+                    </h2>
+
+                </div>
+
+                <div class="py-8 grid grid-rows-[repeat(3,minmax(200px,auto))] grid-cols-3 gap-3">
+
+                    <div class="uv-card p-5 flex flex-col justify-between rounded-xl gap-3 
+                                backdrop-blur-lg border border-white/50 shadow-lg
+                                transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                        
+                            <div class="uv-header flex items-center">    
+
+                                <svg class="uv-icon" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 2V5M12 19V22M2 12H5M19 12H22M4.9 4.9L7 7M17 17L19.1 19.1M19.1 4.9L17 7M7 17L4.9 19.1"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"/>
+                                </svg>
+
+                                <p class="label">UV Index</p>
+                            </div>
+                            
+                            <h2 class="uv-value">7</h2>
+                            <p class="uv-status">Very High</p>
+                        
+                        <div class="uv-scale">
+                          <div class="uv-fill"></div>
+                          <div class="uv-thumb"></div>
+                        </div>
+                          <p class="uv-desc">
+                          Protection recommended
+                        </p>
+                    </div>
+
+                    <div class="bg-[#ffffffbf] flex flex-col rounded-xl gap-3 flex-1 p-5 
+                                backdrop-blur-lg border border-white/50 shadow-lg
+                                transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
+                        <div class="flex justify-between items-center text-[#7a8394] font-semibold">
+
+                            <div class="flex items-center gap-3">
+
+                            <div class="bg-green-100 p-2.5 rounded-2xl" >
+                            <img src="src/Image/ChatGPT Image Jun 13, 2026, 11_56_40 PM.png" alt="" class="w-7">
+                            </div>
+
+                            <p>Pressure</p>
+
+                            </div>
+
+                            <p class="pressure-status">hPa</p>
+
+                        </div>
+                    
+                        <div class="pressure-display">
+                            <div class="orbit orbit-1"></div>
+                            <div class="orbit orbit-2"></div>
+                            <div class="orbit orbit-3"></div>
+                    
+                            <div class="pressure-core">
+                                <span class="pressure-value">1013</span>
+                                <span class="pressure-label">Normal</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="forecast-card bg-[#ffffffbf] rounded-xl p-5 gap-2 flex-1 backdrop-blur-lg 
+                                  border border-white/50 shadow-lg flex flex-col items-center
+                                  transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl row-span-2">
+                    
+                        <div class="header w-full mb-5 flex justify-between gap-5">
+                            <div>
+                                <h2>Hourly Forecast</h2>
+                                <p>Next 24 Hours</p>
+                            </div>
+                    
+                            <div class="current-temp">
+                                <span id="currentTemp">24°</span>
+                            </div>
+                        </div>
+                    
+                        <div class="chart-container">
+                            <svg id="chart" viewBox="0 0 400 220">
+                    
+                                <defs>
+                                    <linearGradient id="fillGradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#3b82f6" stop-opacity=".35"/>
+                                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+                                    </linearGradient>
+                                </defs>
+                    
+                                <path id="area"></path>
+                                <path id="line"></path>
+                    
+                                <g id="points"></g>
+                    
+                            </svg>
+                    
+                            <div class="tooltip" id="tooltip"></div>
+                        </div>
+                    
+                        <div class="timeline mb-4" id="timeline"></div>
+
+                        <div class="hourly-card w-full flex flex-col gap-2">
+                        <div class="header">
+                            <div>
+                                <p class="w-full text-xl">Peaks Acheived</p>
+                            </div>
+                    
+                        </div>
+                    
+                        <div class="chart-area">
+                            <!-- Chart Here -->
+                        </div>
+
+                        <div class="stats">
+                            <div class="stat">
+                                <span>High</span>
+                                <strong id="high">24°</strong>
+                            </div>
+                    
+                            <div class="stat">
+                                <span>Low</span>
+                                <strong id="low">16°</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    </div>
+
+                    <div class="col-span-2 p-3 flex flex-col justify-center overflow-hidden rounded-xl bg-[#f5f5f5fb] backdrop-blur-lg border border-white/50 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                        
+                        <div id="map" class="rounded-2xl border border-slate-100"></div>
+                        
+                        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+                    </div>
+                    <div class="rounded-xl p-5 flex flex-col justify-between
+                               bg-[#ffffffbf] backdrop-blur-lg border border-white/50 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                                <div class="flex gap-4 items-center justify-start">
+                                        <div class="aq-icon">🍃</div>
+                                        <p class="w-full text-[#7a8394] text-[14px] font-semibold">Air Quality</p>
+                                </div>
+                                <div class="flex justify-between">
+                                <div class="flex flex-col justify-between">
+                                      <p class="aqi-value mt-6">124</p>
+                                      <div class="status-badge">
+                                      <span class="dot"></span>
+                                      <span class="aqi-status">Unhealthy</span>
+                                    </div>
+                                </div>
+                            
+                                <div class="progress-circle ">
+                                  <svg viewBox="0 0 120 120" class="">
+                                    <defs>
+                                      <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#60a5fa" />
+                                        <stop offset="35%" stop-color="#4ade80" />
+                                        <stop offset="70%" stop-color="#fde047" />
+                                        <stop offset="100%" stop-color="#fb923c" />
+                                      </linearGradient>
+                                    </defs>
+                                
+                                    <!-- Background -->
+                                    <circle
+                                      class="bg-ring"
+                                      cx="60"
+                                      cy="60"
+                                      r="50"
+                                    />
+                                
+                                    <!-- Progress -->
+                                    <circle
+                                      class="progress-ring"
+                                      cx="60"
+                                      cy="60"
+                                      r="50"
+                                    />
+                                  </svg>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="col-span-2 rounded-xl p-5 grid grid-cols-3 grid-rows-1 
+                    bg-[#ffffffbf] backdrop-blur-lg border border-white/50 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                        
+                    <div class="flex flex-col justify-between items-center">
+                        <p class="text-[14px] font-semibold text-[#7a8394]">
+                            Humidity
+                        </p>
+                        <div class="gauge1">
+                            <svg class="svg1" viewBox="0 0 200 100">
+                                <path
+                                    id="track"
+                                    d="M20 100 A80 80 0 0 1 180 100"
+                                />
+                                <path
+                                    id="progress"
+                                    d="M20 100 A80 80 0 0 1 180 100"
+                                />
+                            </svg>
+                                <div class="value" id="value">50%</div>
+                        </div>
+                        <p class="humidity-status bg-[#e3eeff] px-2.5 py-1 rounded-full text-[#1b61d1]">
+                            Normal
+                        </p>
+                        </div>
+
+                        <div class="flex flex-col justify-between items-center gap-2">
+                        <p class="text-[14px] font-semibold text-[#7a8394]">Wind Status</p>
+                        <div class="compass">
+                        <svg viewBox="0 0 200 200" class="max-w-[130px] w-full h-full">
+                        <!-- Outer Ring -->
+                        <circle
+                          cx="100"
+                          cy="100"
+                          r="90"
+                          fill=none
+                          stroke="#FFE854"
+                          stroke-width="4"
+                        />
+                    
+                        <!-- Cardinal Directions -->
+                        <text x="100" y="30" text-anchor="middle" class="label">N</text>
+                        <text x="170" y="105" text-anchor="middle" class="label">E</text>
+                        <text x="100" y="185" text-anchor="middle" class="label">S</text>
+                        <text x="30" y="105" text-anchor="middle" class="label">W</text>
+                    
+                        <!-- Needle -->
+                        <g id="needle" transform="rotate(45 100 100)">
+                          <path
+                            d="M100 45 L112 100 L100 92 L88 100 Z"
+                            fill="#FF474D"
+                          />
+                          <path
+                            d="M100 155 L112 100 L100 108 L88 100 Z"
+                            fill="#87cefa"
+                          />
+                        </g>
+                    
+                        <!-- Center -->
+                        <circle
+                          cx="100"
+                          cy="100"
+                          r="10"
+                          fill="#F3F4F6"
+                          stroke="#cbd5e1"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </div>
+                    <p class="wind-value text-slate-600 font-medium">7.7 Km/h</p>
+                    
+                    </div>
+
+                    <div class="visibility-card">
+                    <div class="card-header flex justify-center mr-4">
+                        <span class="card-label text-[14px] font-semibold text-[#7a8394]">Visibility</span>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                    <div class="ml-4 text-slate-900">
+                        <span class="visibility-value">10</span> 
+                        <span class="visiblity-km">km</span>
+                    </div>
+                
+                    <div class="visibility-bar">
+                        <div class="visibility-progress"></div>
+                    </div>
+                    </div>
+                
+                    <p class="visibility-status flex justify-center">
+                        Excellent
+                    </p>
+                </div>
+                
+                </div>
+
+
+                </div>
+
+            </section>
+
+        </section>
+
+        <section class="sidebar hidden h-full bg-gradient-to-b from-purple-700 via-purple-600 to-pink-500 text-3xl text-white font-semibold font-serif
+                        flex justify-center items-start">
+
+        <div class="w-[100%] h-[100vh] flex justify-center items-center font-sans">
+            Coming soon
+        </div>
+        </section>
+
+    </div>
+
+<script type="module" src="/src/main.js"></script>  
+</body>
+</html>
