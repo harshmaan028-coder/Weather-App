@@ -817,49 +817,49 @@ function updateTodayImage(weatherCode, todayimages, high, highvalue, low, lowval
     if(skystatus === "clear")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/sun (1).png";
+             current.src = "/Image/sun (1).png";
         })
     }
     else if(skystatus === "partly cloudy")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/weather.png";
+             current.src = "/Image/weather.png";
         })
     }
     else if(skystatus === "cloudy")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/cloudy.png";
+             current.src = "/Image/cloudy.png";
         })
     }
     else if(skystatus === "fog")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/fog.png";
+             current.src = "/Image/fog.png";
         })
     }
     else if(skystatus === "drizzle")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/cloudy (1).png";
+             current.src = "/Image/cloudy (1).png";
         })
     }
     else if(skystatus === "rain")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/rainy-day.png";
+             current.src = "/Image/rainy-day.png";
         })
     }
     else if(skystatus === "snow")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/snow.png";
+             current.src = "/Image/snow.png";
         })
     }
     else if(skystatus === "thunderstorm")
     {
         todayImages.forEach((current) => {
-             current.src = "src/Image/thunder.png";
+             current.src = "/Image/thunder.png";
         })
     }
     else{
@@ -875,35 +875,35 @@ function updateOtherImage(weatherCode, otherimage, high, highvalue, low, lowvalu
 
     if(skystatus === "clear")
     {
-        otherimage.src = "src/Image/sun (1).png";
+        otherimage.src = "/Image/sun (1).png";
     }
     else if(skystatus === "partly cloudy")
     {
-        otherimage.src = "src/Image/weather.png";
+        otherimage.src = "/Image/weather.png";
     }
     else if(skystatus === "cloudy")
     {
-        otherimage.src = "src/Image/cloudy.png";
+        otherimage.src = "/Image/cloudy.png";
     }
     else if(skystatus === "fog")
     {
-        otherimage.src = "src/Image/fog.png";
+        otherimage.src = "/Image/fog.png";
     }
     else if(skystatus === "drizzle")
     {
-        otherimage.src = "src/Image/cloudy (1).png";
+        otherimage.src = "/Image/cloudy (1).png";
     }
     else if(skystatus === "rain")
     {
-        otherimage.src = "src/Image/rainy-day.png";
+        otherimage.src = "/Image/rainy-day.png";
     }
     else if(skystatus === "snow")
     {
-        otherimage.src = "src/Image/snow.png";
+        otherimage.src = "  /Image/snow.png";
     }
     else if(skystatus === "thunderstorm")
     {
-        otherimage.src = "src/Image/thunder.png";
+        otherimage.src = "/Image/thunder.png";
     }
     else{
         return "unknwon";
@@ -983,14 +983,14 @@ function formatDuration2(mseconds) {
 
 function updateContinentImage(continent, imageElement) {
   const continentImages = {
-    Asia: "src/image/vector-banner-on-themes-trip-260nw-301497002.jpg",
-    Europe: "src/image/travel-banner-trip-to-europe-vector-themes-sights-vacations-summer-adventure-modern-flat-style-64312513.webp",
-    Africa: "src/image/travel-banner-trip-to-europe-vector-themes-sights-vacations-summer-adventure-modern-flat-style-64312513.webp",
-    "North America": "src/image/vector-banner-on-themes-trip-260nw-336649379.jpg",
-    "South America": "src/image/vector-banner-on-themes-trip-260nw-336649379.jpg",
-    "Australian continent": "src/image/Gemini_Generated_Image_ywwnkaywwnkaywwn.png",
-    Antarctica: "src/image/penguin-animals-antarctic-cold-landscape-260nw-2211904261.jpg",
-    "Insular Oceania": "src/image/Gemini_Generated_Image_ywwnkaywwnkaywwn.png"
+    Asia: "/image/vector-banner-on-themes-trip-260nw-301497002.jpg",
+    Europe: "/image/travel-banner-trip-to-europe-vector-themes-sights-vacations-summer-adventure-modern-flat-style-64312513.webp",
+    Africa: "/image/travel-banner-trip-to-europe-vector-themes-sights-vacations-summer-adventure-modern-flat-style-64312513.webp",
+    "North America": "/image/vector-banner-on-themes-trip-260nw-336649379.jpg",
+    "South America": "/image/vector-banner-on-themes-trip-260nw-336649379.jpg",
+    "Australian continent": "/image/Gemini_Generated_Image_ywwnkaywwnkaywwn.png",
+    Antarctica: "/image/penguin-animals-antarctic-cold-landscape-260nw-2211904261.jpg",
+    "Insular Oceania": "/image/Gemini_Generated_Image_ywwnkaywwnkaywwn.png"
   };
 
   imageElement.src =
@@ -1020,35 +1020,35 @@ function updatecards(Array, codes, temp, feels, humidity, wind)
     
         if(status === "clear")
         {
-            localCard.querySelector(".card-img").src = "src/Image/sun (1).png";
+            localCard.querySelector(".card-img").src = "/Image/sun (1).png";
         }
         else if(status === "partly cloudy")
         {
-            localCard.querySelector(".card-img").src = "src/Image/weather.png";
+            localCard.querySelector(".card-img").src = "/Image/weather.png";
         }
         else if(status === "cloudy")
         {
-            localCard.querySelector(".card-img").src = "src/Image/cloudy.png";
+            localCard.querySelector(".card-img").src = "/Image/cloudy.png";
         }
         else if(status === "fog")
         {
-            localCard.querySelector(".card-img").src = "src/Image/fog.png";
+            localCard.querySelector(".card-img").src = "/Image/fog.png";
         }
         else if(status === "drizzle")
         {
-            localCard.querySelector(".card-img").src = "src/Image/cloudy (1).png";
+            localCard.querySelector(".card-img").src = "/Image/cloudy (1).png";
         }
         else if(status === "rain")
         {
-            localCard.querySelector(".card-img").src = "src/Image/rainy-day.png";
+            localCard.querySelector(".card-img").src = "/Image/rainy-day.png";
         }
         else if(status === "snow")
         {
-            localCard.querySelector(".card-img").src = "src/Image/snow.png";
+            localCard.querySelector(".card-img").src = "/Image/snow.png";
         }
         else if(status === "thunderstorm")
         {
-            localCard.querySelector(".card-img").src = "src/Image/thunder.png";
+            localCard.querySelector(".card-img").src = "/Image/thunder.png";
         }
         else{
             return "unknwon";
