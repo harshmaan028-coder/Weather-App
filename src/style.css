@@ -1011,3 +1011,28 @@
     width: 100px;
     margin-top: 30px;
 }
+
+/* Hide the warning on desktop */
+.mobile-warning {
+    display: none;
+}
+
+/* Show warning on tablets and phones */
+@media (max-width: 1250px) {
+    .mobile-warning {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        background: #0f172a;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        z-index: 9999;
+    }
+
+    .site-content {
+        display: none;
+    }
+}
