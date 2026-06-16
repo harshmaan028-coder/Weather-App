@@ -350,7 +350,7 @@ function callApi()
                 .then((response) => response.json())
                 .then((data) => {                   
                     console.log(data) // shadows earlier data variable
-                    temperature.textContent = data.current.temperature_2m;
+                    temperature.textContent = data.current.temperature_2m.toFixed(0);
                     feel = data.current.apparent_temperature + "° ✨";
                     feels_like.textContent = feel
                     const hour = data.current.time.split(":")[0];
@@ -537,6 +537,7 @@ if(input2)
             fahrenheit.classList.remove("active2")
             celsius.disabled = true;
             fahrenheit.disabled= false;
+            document.querySelector(".temperatureC").textContent = "°C"
         }
     })
 }
